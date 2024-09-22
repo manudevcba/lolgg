@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 function App () {
-  const API_KEY = 'RGAPI-172c0ced-da1d-45fc-bd67-dbe1657a3c3d'
+  const API_KEY = 'RGAPI-5c7a7140-e92a-4a95-be38-1c2d9e5eff9e'
   const [buscarNick, setBuscarNick] = useState('')
   const [buscarTag, setBuscarTag] = useState('')
   const [playerData, setPlayerData] = useState({})
