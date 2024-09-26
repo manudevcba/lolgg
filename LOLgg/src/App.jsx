@@ -9,7 +9,7 @@ function App () {
 
   function buscarPlayer (event) {
     console.log(buscarNick)
-    console.log(buscarTag)
+    console.log(buscarPlayer)
     axios.get('http://localhost:4000/infoAcc', { params: { nick: buscarNick, tag: buscarTag } })
       .then(function (response) {
         setPlayerData(response.data)
@@ -28,7 +28,12 @@ function App () {
       <input type='text' placeholder='nick = marinero' onChange={e => setBuscarNick(e.target.value)} />
       <input type='text' placeholder='tag = 7218' onChange={e => setBuscarTag(e.target.value)} />
       <button onClick={buscarPlayer}>buscar sumoner</button>
-      <br /> <br />
+      <br /><br />
+      <img width='100' height='100' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
+      <p className='texth2'>
+        Summoner Name: {buscarNick}#{buscarTag}  <br />
+        Summoner LVL: {playerData.summonerLevel}
+      </p>
 
     </>
   )
