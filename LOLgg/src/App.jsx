@@ -8,6 +8,8 @@ function App () {
   const [playerData, setPlayerData] = useState({})
 
   function buscarPlayer (event) {
+    console.log(buscarNick)
+    console.log(buscarTag)
     axios.get('http://localhost:4000/infoAcc', { params: { nick: buscarNick, tag: buscarTag } })
       .then(function (response) {
         setPlayerData(response.data)
