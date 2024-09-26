@@ -8,7 +8,7 @@ function App () {
   const [playerData, setPlayerData] = useState({})
 
   function buscarPlayer (event) {
-    axios.get('http://localhost:4000/infoAcc')
+    axios.get('http://localhost:4000/infoAcc', { params: { nick: buscarNick, tag: buscarTag } })
       .then(function (response) {
         setPlayerData(response.data)
       }).catch(function (error) {
