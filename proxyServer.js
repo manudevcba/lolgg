@@ -6,7 +6,7 @@ const app = express()
 
 app.use(cors())
 
-const API_KEY = 'RGAPI-c635d2e5-41e6-4cff-9601-c96010530d59'
+const API_KEY = 'RGAPI-788a6f6f-eb6d-4c82-a2c8-e8b7c7136384'
 
 app.get('/infoAcc', async (req, res) => {
   function getPlayerPUUID (playerNick, playerTag) {
