@@ -6,21 +6,25 @@ const app = express()
 
 app.use(cors())
 
-const API_KEY = 'RGAPI-788a6f6f-eb6d-4c82-a2c8-e8b7c7136384'
+const API_KEY = 'RGAPI-59128a00-7c4b-4594-a826-507faca4164e'
 
 app.get('/infoAcc', async (req, res) => {
-  function getPlayerPUUID (playerNick, playerTag) {
-    return axios.get(`https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${playerNick}/${playerTag}?api_key=${API_KEY}`)
+  const playerReg = req.query.region
+  const playerNick = req.query.nick
+  const playerTag = req.query.tag
+  const playerServer = req.query.server
+
+  function getPlayerPUUID (playerNick, playerTag, playerReg) {
+    return axios.get(`https://${playerReg}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${playerNick}/${playerTag}?api_key=${API_KEY}`)
       .then(response => {
         console.log(response.data)
         return response.data.puuid
       }).catch(err => err)
   }
-  const playerNick = req.query.nick
-  const playerTag = req.query.tag
 
-  const PUUID = await getPlayerPUUID(playerNick, playerTag)
-  const API_CALL = `https://la2.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${PUUID}?api_key=${API_KEY}`
+  const PUUID = await getPlayerPUUID(playerNick, playerTag, playerReg)
+  console.log('el puuid es:' + PUUID)
+  const API_CALL = `https://${playerServer}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${PUUID}?api_key=${API_KEY}`
 
   const infoAcc = await axios.get(API_CALL)
     .then(response => response.data)
