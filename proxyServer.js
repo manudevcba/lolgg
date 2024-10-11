@@ -6,7 +6,7 @@ const app = express()
 
 app.use(cors())
 
-const API_KEY = 'RGAPI-59128a00-7c4b-4594-a826-507faca4164e'
+const API_KEY = 'RGAPI-93dc91de-25d0-4e9d-9eb8-42005a76d343'
 
 app.get('/infoAcc', async (req, res) => {
   const playerReg = req.query.region
@@ -15,6 +15,7 @@ app.get('/infoAcc', async (req, res) => {
   const playerServer = req.query.server
 
   function getPlayerPUUID (playerNick, playerTag, playerReg) {
+    // https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/marinero/7218?api_key=RGAPI-93dc91de-25d0-4e9d-9eb8-42005a76d343
     return axios.get(`https://${playerReg}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${playerNick}/${playerTag}?api_key=${API_KEY}`)
       .then(response => {
         console.log(response.data)
