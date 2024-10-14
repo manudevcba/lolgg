@@ -2,10 +2,13 @@ import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
+const API_KEY = 'RGAPI-4fd9bbe1-01d7-4fca-85dc-3ed8348c7637'
+
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
   const [playerData, setPlayerData] = useState({})
-  const [buscarServer, setBuscarServer] = useState('')
+  const [buscarServer, setBuscarServer] = useState('br1+americas')
+  const [playerRank, setPlayerRank] = useState({})
 
   const servers = {
     brasil: 'br1+americas',
@@ -19,26 +22,29 @@ function App () {
     oceania: 'oc1+sea'
   }
 
-  function buscarPlayer (event) {
-    console.log(buscarNick)
-    console.log(buscarPlayer)
-    const nicktag = buscarNick.split('#')
-    const elNick = nicktag[0]
-    const elTag = nicktag[1]
-    const regsv = buscarServer.split('+')
-    const sv = regsv[0]
-    const reg = regsv[1]
+  async function buscarPlayer (event) {
+    try {
+      const nicktag = buscarNick.split('#')
+      const elNick = nicktag[0]
+      const elTag = nicktag[1]
+      const regsv = buscarServer.split('+')
+      const sv = regsv[0]
+      const reg = regsv[1]
 
-    axios.get('http://localhost:4000/infoAcc', { params: { nick: elNick, tag: elTag, server: sv, region: reg } })
-      .then(function (response) {
-        setPlayerData(response.data)
-      }).catch(function (error) {
-        console.log(error)
+      const responsePlayer = await axios.get('http://localhost:4000/infoAcc', {
+        params: { nick: elNick, tag: elTag, server: sv, region: reg }
       })
-  }
+      setPlayerData(responsePlayer.data)
 
+      const responseRank = await axios.get(`https://${sv}.api.riotgames.com/lol/league/v4/entries/by-summoner/${responsePlayer.data.id}?api_key=${API_KEY}`)
+      setPlayerRank(responseRank.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   console.log(playerData)
   console.log(buscarServer)
+  console.log(playerRank)
 
   return (
     <>
@@ -65,6 +71,18 @@ function App () {
       </p>
 
       <img width='100' height='100' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
+      <p className='texth2'>
+        {playerRank.length > 0
+          ? (
+            <>
+              Rank SoloQ: {playerRank[0].tier} {playerRank[0].rank} {playerRank[0].leaguePoints} Lps <br />
+              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}%
+            </>
+            )
+          : (
+              'No hay datos'
+            )}
+      </p>
 
     </>
   )
