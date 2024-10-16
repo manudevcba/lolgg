@@ -46,40 +46,29 @@ function App () {
   console.log(playerRank)
 
   function imagenRank (rank) {
-
-      if (rank === "DIAMOND"){
-        return <a href="https://imgur.com/5NfRZ8i"><img className='rank-imagen' src="https://i.imgur.com/5NfRZ8i.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "IRON"){
-        return <a href="https://imgur.com/TUDQs3o"><img className="rank-imagen"src="https://i.imgur.com/TUDQs3o.png" title="source: imgur.com" /></a>  
-      }
-      else if (rank === "BRONZE") {
-        return <a href="https://imgur.com/gRYyXkx"><img className="rank-imagen"src="https://i.imgur.com/gRYyXkx.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "SILVER"){
-        return <a href="https://imgur.com/UEOK81G"><img className="rank-imagen" src="https://i.imgur.com/UEOK81G.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "GOLD"){
-        return <a href="https://imgur.com/vrTdXze"><img className="rank-imagen" src="https://i.imgur.com/vrTdXze.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "PLATINUM") {
-        return <a href="https://imgur.com/pvsqRfl"><img className="rank-imagen" src="https://i.imgur.com/pvsqRfl.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "ESMERALD") {
-        return <a href="https://imgur.com/ZK1LeZQ"><img className="rank-imagen" src="https://i.imgur.com/ZK1LeZQ.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "MASTER"){
-        return <a href="https://imgur.com/m55levP"><img className="rank-imagen" src="https://i.imgur.com/m55levP.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "GRANDMASTER") {
-        return <a href="https://imgur.com/AObqDXT"><img className="rank-imagen" src="https://i.imgur.com/AObqDXT.png" title="source: imgur.com" /></a>
-      }
-      else if (rank === "CHALLENGER") {
-        return <a href="https://imgur.com/N07nf04"><img className="rank-imagen" src="https://i.imgur.com/N07nf04.png" title="source: imgur.com" /></a>
-      }
-      else {
-        return <a href="">UNRANKED O ERROR ! :D</a>
-      }
+    if (rank === 'DIAMOND') {
+      return <a href='https://imgur.com/5NfRZ8i'><img className='rank-imagen' src='https://i.imgur.com/5NfRZ8i.png' title='source: imgur.com' /></a>
+    } else if (rank === 'IRON') {
+      return <a href='https://imgur.com/TUDQs3o'><img className='rank-imagen' src='https://i.imgur.com/TUDQs3o.png' title='source: imgur.com' /></a>
+    } else if (rank === 'BRONZE') {
+      return <a href='https://imgur.com/gRYyXkx'><img className='rank-imagen' src='https://i.imgur.com/gRYyXkx.png' title='source: imgur.com' /></a>
+    } else if (rank === 'SILVER') {
+      return <a href='https://imgur.com/UEOK81G'><img className='rank-imagen' src='https://i.imgur.com/UEOK81G.png' title='source: imgur.com' /></a>
+    } else if (rank === 'GOLD') {
+      return <a href='https://imgur.com/vrTdXze'><img className='rank-imagen' src='https://i.imgur.com/vrTdXze.png' title='source: imgur.com' /></a>
+    } else if (rank === 'PLATINUM') {
+      return <a href='https://imgur.com/pvsqRfl'><img className='rank-imagen' src='https://i.imgur.com/pvsqRfl.png' title='source: imgur.com' /></a>
+    } else if (rank === 'ESMERALD') {
+      return <a href='https://imgur.com/ZK1LeZQ'><img className='rank-imagen' src='https://i.imgur.com/ZK1LeZQ.png' title='source: imgur.com' /></a>
+    } else if (rank === 'MASTER') {
+      return <a href='https://imgur.com/m55levP'><img className='rank-imagen' src='https://i.imgur.com/m55levP.png' title='source: imgur.com' /></a>
+    } else if (rank === 'GRANDMASTER') {
+      return <a href='https://imgur.com/AObqDXT'><img className='rank-imagen' src='https://i.imgur.com/AObqDXT.png' title='source: imgur.com' /></a>
+    } else if (rank === 'CHALLENGER') {
+      return <a href='https://imgur.com/N07nf04'><img className='rank-imagen' src='https://i.imgur.com/N07nf04.png' title='source: imgur.com' /></a>
+    } else {
+      return <a href=''>UNRANKED O ERROR ! :D</a>
+    }
   }
 
   return (
@@ -106,15 +95,17 @@ function App () {
         Summoner LVL: {playerData.summonerLevel}
       </p>
 
-      <img className='icono' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
-      {imagenRank(playerRank[0].tier)}
       <p className='texth2'>
         {playerRank.length > 0
           ? (
             <>
+              <img className='icono' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
+              {imagenRank(playerRank[0].tier)}
+              <br />
+
               Rank SoloQ: {playerRank[0].tier} {playerRank[0].rank} {playerRank[0].leaguePoints} Lps <br />
-              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}% <br />              
-              
+              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}% <br />
+
             </>
             )
           : (
