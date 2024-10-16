@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
-const API_KEY = 'RGAPI-4fd9bbe1-01d7-4fca-85dc-3ed8348c7637'
+const API_KEY = 'RGAPI-ca8762a4-7cee-48eb-bec2-7a0c62c9244c'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
@@ -25,14 +25,13 @@ function App () {
   async function buscarPlayer (event) {
     try {
       const nicktag = buscarNick.split('#')
-      const elNick = nicktag[0]
-      const elTag = nicktag[1]
+      const [nick, tag] = nicktag
       const regsv = buscarServer.split('+')
       const sv = regsv[0]
       const reg = regsv[1]
 
       const responsePlayer = await axios.get('http://localhost:4000/infoAcc', {
-        params: { nick: elNick, tag: elTag, server: sv, region: reg }
+        params: { nick, tag, server: sv, region: reg }
       })
       setPlayerData(responsePlayer.data)
 
@@ -45,6 +44,43 @@ function App () {
   console.log(playerData)
   console.log(buscarServer)
   console.log(playerRank)
+
+  function imagenRank (rank) {
+
+      if (rank === "DIAMOND"){
+        return <a href="https://imgur.com/5NfRZ8i"><img className='rank-imagen' src="https://i.imgur.com/5NfRZ8i.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "IRON"){
+        return <a href="https://imgur.com/TUDQs3o"><img className="rank-imagen"src="https://i.imgur.com/TUDQs3o.png" title="source: imgur.com" /></a>  
+      }
+      else if (rank === "BRONZE") {
+        return <a href="https://imgur.com/gRYyXkx"><img className="rank-imagen"src="https://i.imgur.com/gRYyXkx.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "SILVER"){
+        return <a href="https://imgur.com/UEOK81G"><img className="rank-imagen" src="https://i.imgur.com/UEOK81G.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "GOLD"){
+        return <a href="https://imgur.com/vrTdXze"><img className="rank-imagen" src="https://i.imgur.com/vrTdXze.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "PLATINUM") {
+        return <a href="https://imgur.com/pvsqRfl"><img className="rank-imagen" src="https://i.imgur.com/pvsqRfl.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "ESMERALD") {
+        return <a href="https://imgur.com/ZK1LeZQ"><img className="rank-imagen" src="https://i.imgur.com/ZK1LeZQ.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "MASTER"){
+        return <a href="https://imgur.com/m55levP"><img className="rank-imagen" src="https://i.imgur.com/m55levP.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "GRANDMASTER") {
+        return <a href="https://imgur.com/AObqDXT"><img className="rank-imagen" src="https://i.imgur.com/AObqDXT.png" title="source: imgur.com" /></a>
+      }
+      else if (rank === "CHALLENGER") {
+        return <a href="https://imgur.com/N07nf04"><img className="rank-imagen" src="https://i.imgur.com/N07nf04.png" title="source: imgur.com" /></a>
+      }
+      else {
+        return <a href="">UNRANKED O ERROR ! :D</a>
+      }
+  }
 
   return (
     <>
@@ -70,13 +106,15 @@ function App () {
         Summoner LVL: {playerData.summonerLevel}
       </p>
 
-      <img width='100' height='100' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
+      <img className='icono' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
+      {imagenRank(playerRank[0].tier)}
       <p className='texth2'>
         {playerRank.length > 0
           ? (
             <>
               Rank SoloQ: {playerRank[0].tier} {playerRank[0].rank} {playerRank[0].leaguePoints} Lps <br />
-              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}%
+              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}% <br />              
+              
             </>
             )
           : (
