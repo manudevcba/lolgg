@@ -58,7 +58,7 @@ function App () {
       return <a href='https://imgur.com/vrTdXze'><img className='rank-imagen' src='https://i.imgur.com/vrTdXze.png' title='source: imgur.com' /></a>
     } else if (rank === 'PLATINUM') {
       return <a href='https://imgur.com/pvsqRfl'><img className='rank-imagen' src='https://i.imgur.com/pvsqRfl.png' title='source: imgur.com' /></a>
-    } else if (rank === 'ESMERALD') {
+    } else if (rank === 'EMERALD') {
       return <a href='https://imgur.com/ZK1LeZQ'><img className='rank-imagen' src='https://i.imgur.com/ZK1LeZQ.png' title='source: imgur.com' /></a>
     } else if (rank === 'MASTER') {
       return <a href='https://imgur.com/m55levP'><img className='rank-imagen' src='https://i.imgur.com/m55levP.png' title='source: imgur.com' /></a>
@@ -89,7 +89,7 @@ function App () {
         <option value={servers.oceania}>OC</option>
 
       </select>
-      <button onClick={buscarPlayer}>buscar sumoner</button>
+      <button onClick={buscarPlayer}>buscar summoner</button>
       <p className='texth2'>
         Summoner Name: {buscarNick} <br />
         Summoner LVL: {playerData.summonerLevel}
