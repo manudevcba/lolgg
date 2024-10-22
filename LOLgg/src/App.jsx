@@ -2,13 +2,15 @@ import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
-const API_KEY = 'RGAPI-ca8762a4-7cee-48eb-bec2-7a0c62c9244c'
+const API_KEY = 'RGAPI-a90fa316-334b-4edb-a5ac-8ab05ab7cee8'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
   const [playerData, setPlayerData] = useState({})
   const [buscarServer, setBuscarServer] = useState('br1+americas')
   const [playerRank, setPlayerRank] = useState({})
+  const [playerMatch, setPlayerMatch] = useState([])
+  const [playerHistory, setPlayerHistory] = useState([])
 
   const servers = {
     brasil: 'br1+americas',
@@ -33,17 +35,32 @@ function App () {
       const responsePlayer = await axios.get('http://localhost:4000/infoAcc', {
         params: { nick, tag, server: sv, region: reg }
       })
+      const playerDataTemp = responsePlayer.data
       setPlayerData(responsePlayer.data)
 
       const responseRank = await axios.get(`https://${sv}.api.riotgames.com/lol/league/v4/entries/by-summoner/${responsePlayer.data.id}?api_key=${API_KEY}`)
       setPlayerRank(responseRank.data)
+
+      const responseMatch = await axios.get(`https://${reg}.api.riotgames.com/lol/match/v5/matches/by-puuid/${playerDataTemp.puuid}/ids?api_key=${API_KEY}`)
+
+      const playerMatchTemp = responseMatch.data
+      setPlayerMatch(playerMatchTemp)
+
+      const arrayMatch = []
+      for (let i = 0; i < playerMatchTemp.length - 15; i++) {
+        const matchData = await axios.get(`https://${reg}.api.riotgames.com/lol/match/v5/matches/${playerMatchTemp[i]}?api_key=${API_KEY}`)
+        arrayMatch.push(matchData.data)
+      }
+      setPlayerHistory(arrayMatch)
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(playerData)
-  console.log(buscarServer)
-  console.log(playerRank)
+  console.log('playerData: ', playerData)
+  console.log('buscarServer: ', buscarServer)
+  console.log('playerRank: ', playerRank)
+  console.log('playerMaych: ', playerMatch)
+  console.log('playerHistory: ', playerHistory)
 
   function imagenRank (rank) {
     if (rank === 'DIAMOND') {
@@ -109,7 +126,7 @@ function App () {
             </>
             )
           : (
-              'No hay datos'
+              'No hay datos, por favor ingresa tu cuenta! :D'
             )}
       </p>
 
