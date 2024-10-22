@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
@@ -23,6 +23,9 @@ function App () {
     na: 'na1+americas',
     oceania: 'oc1+sea'
   }
+
+  const nickytag2 = buscarNick.split('#')
+  const nick2 = nickytag2[0]
 
   async function buscarPlayer (event) {
     try {
@@ -89,7 +92,7 @@ function App () {
   }
 
   return (
-    <>
+    <div>
 
       <img href='https://ibb.co/M8z5svw' src='https://i.ibb.co/M8z5svw/lgo.png' alt='lgo' border='0' />
       <h2 className='texth2'>Ingrese su nick y tag de lol separado con #</h2>
@@ -129,8 +132,31 @@ function App () {
               'No hay datos, por favor ingresa tu cuenta! :D'
             )}
       </p>
+      {playerHistory.length
+        ? (
+          <div className='texth2'> Hay datos <br />
+            {playerHistory.map((historyData, index) => (
+              <React.Fragment key={index}>
+                <h3>GAME {index + 1}</h3>
+                <div className={historyData.info.participants.some(participant => participant.riotIdGameName === nick2)
+                  ? historyData.info.participants.some(participant => participant.riotIdGameName === nick2 && participant.win)
+                    ? 'win'
+                    : 'lose'
+                  : 'lose'}
+                >
+                  {historyData.info.participants.map((data, participantsIndex) => (
+                    <p key={participantsIndex}>
+                      player {participantsIndex + 1}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)})
+                    </p>
+                  ))}
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          )
+        : <p className='texth2'> No hay datos en el historial</p>}
 
-    </>
+    </div>
   )
 }
 

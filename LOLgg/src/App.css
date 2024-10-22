@@ -16,3 +16,12 @@
 body {
     background-color:lightgrey ;
 }
+.win {
+    background-color: rgb(66, 202, 54);
+    opacity: 0.8;
+    
+}
+.lose {
+    background-color: rgba(248, 75, 75, 0.733);
+    opacity: 0.8;    
+}
