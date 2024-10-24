@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
-const API_KEY = 'RGAPI-a90fa316-334b-4edb-a5ac-8ab05ab7cee8'
+const API_KEY = 'RGAPI-340321fd-b92b-40fd-902d-0ca2a003c78e'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
@@ -23,6 +23,8 @@ function App () {
     na: 'na1+americas',
     oceania: 'oc1+sea'
   }
+
+  // "https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/" iconos campeones xd
 
   const nickytag2 = buscarNick.split('#')
   const nick2 = nickytag2[0]
@@ -64,6 +66,7 @@ function App () {
   console.log('playerRank: ', playerRank)
   console.log('playerMaych: ', playerMatch)
   console.log('playerHistory: ', playerHistory)
+  console.log('nick: ', nick2)
 
   function imagenRank (rank) {
     if (rank === 'DIAMOND') {
@@ -121,7 +124,7 @@ function App () {
             <>
               <img className='icono' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
               {imagenRank(playerRank[0].tier)}
-              <br />
+              <br /> <br />
 
               Rank SoloQ: {playerRank[0].tier} {playerRank[0].rank} {playerRank[0].leaguePoints} Lps <br />
               Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}% <br />
@@ -134,24 +137,40 @@ function App () {
       </p>
       {playerHistory.length
         ? (
-          <div className='texth2'> Hay datos <br />
-            {playerHistory.map((historyData, index) => (
-              <React.Fragment key={index}>
-                <h3>GAME {index + 1}</h3>
-                <div className={historyData.info.participants.some(participant => participant.riotIdGameName === nick2)
-                  ? historyData.info.participants.some(participant => participant.riotIdGameName === nick2 && participant.win)
-                    ? 'win'
-                    : 'lose'
-                  : 'lose'}
-                >
-                  {historyData.info.participants.map((data, participantsIndex) => (
-                    <p key={participantsIndex}>
-                      player {participantsIndex + 1}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)})
-                    </p>
-                  ))}
-                </div>
-              </React.Fragment>
-            ))}
+          <div className='history-container'>
+            <div className='texth2'>
+              Match History!:<br />
+              {playerHistory.map((historyData, index) => {
+                // Busca el participante que coincide con nick2
+                const participant = historyData.info.participants.find(participant => participant.riotIdGameName === nick2)
+                // Si existe el participante, comprobamos si ganó o perdió
+                const matchResultClass = participant ? (participant.win ? 'win' : 'lose') : 'lose'
+
+                return (
+                  <React.Fragment key={index}>
+                    <h3>GAME {index + 1}</h3>
+                    <div className={matchResultClass}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div>
+                          {historyData.info.participants.slice(0, 5).map((data, participantsIndex) => (
+                            <p key={participantsIndex}>
+                              <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} /> {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} /  ({(data.challenges.kda).toFixed(1)})
+                            </p>
+                          ))}
+                        </div>
+                        <div>
+                          {historyData.info.participants.slice(5, 10).map((data, participantsIndex) => (
+                            <p key={participantsIndex + 5}>
+                              <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} /> {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / ({(data.challenges.kda).toFixed(1)})
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                )
+              })}
+            </div>
           </div>
           )
         : <p className='texth2'> No hay datos en el historial</p>}

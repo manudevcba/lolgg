@@ -6,7 +6,7 @@ const app = express()
 
 app.use(cors())
 
-const API_KEY = 'RGAPI-a90fa316-334b-4edb-a5ac-8ab05ab7cee8'
+const API_KEY = 'RGAPI-340321fd-b92b-40fd-902d-0ca2a003c78e'
 
 app.get('/infoAcc', async (req, res) => {
   const playerReg = req.query.region

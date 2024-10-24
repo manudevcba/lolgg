@@ -10,7 +10,7 @@
 .icono {
     width: 110px;
     height: 110px;
-    margin-right: 6%;
+    margin-right: 3%;
 
 }
 body {
@@ -18,10 +18,26 @@ body {
 }
 .win {
     background-color: rgb(66, 202, 54);
-    opacity: 0.8;
+    opacity: 0.9;
     
 }
 .lose {
     background-color: rgba(248, 75, 75, 0.733);
-    opacity: 0.8;    
+    opacity: 0.9;    
 }
+
+.history-container {
+    width: 50%; /* Ocupar la mitad del ancho */
+    position: absolute;
+    right: 0; /* Posicionarlo a la derecha */
+    top: 0;
+    padding: 20px;
+    margin-top: 120px; /* Ajusta el espacio según el tamaño de tu header */
+  }
+
+.champ-imagen {
+    width: 50px;
+    height: auto;
+}
+  
+  
