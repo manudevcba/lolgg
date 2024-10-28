@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css'
+import { Button } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
 
-const API_KEY = 'RGAPI-340321fd-b92b-40fd-902d-0ca2a003c78e'
+import Box from '@mui/material/Box'
+import Link from '@mui/material/Link'
+
+const API_KEY = 'RGAPI-463d62d1-990e-47cb-9429-7e635cb484c7'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
@@ -96,9 +102,31 @@ function App () {
 
   return (
     <div>
+      <AppBar position='static' color='default'>
+        <Toolbar>
+          <Box display='flex' alignItems='center' mr={2}>
+            <img
+              src='https://i.imgur.com/TUhrHC3.png'
+              alt='logo'
+              style={{ width: '130px', height: 'auto', borderRadius: '8px' }}
+            />
+          </Box>
 
-      <img href='https://ibb.co/M8z5svw' src='https://i.ibb.co/M8z5svw/lgo.png' alt='lgo' border='0' />
-      <h2 className='texth2'>Ingrese su nick y tag de lol separado con #</h2>
+          <Box className='texth2' display='flex' justifyContent='flex-end' flexGrow={1}>
+            <Link href='/' color='inherit' underline='none' mx={2}>
+              Inicio
+            </Link>
+            <Link href='/sobre-nosotros' color='inherit' underline='none' mx={2}>
+              Sobre Nosotros
+            </Link>
+            <Link href='/contacto' color='inherit' underline='none' mx={2}>
+              Contacto
+            </Link>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <br />
+      <br />
       <input type='text' placeholder='ejemplo: marinero#7218' onChange={e => setBuscarNick(e.target.value)} />
       <select name='' id='' onChange={e => setBuscarServer(e.target.value)}>
         <option value={servers.brasil}>BR</option>
@@ -112,7 +140,7 @@ function App () {
         <option value={servers.oceania}>OC</option>
 
       </select>
-      <button onClick={buscarPlayer}>buscar summoner</button>
+      <Button variant='contained' size='small' onClick={buscarPlayer}>buscar summoner</Button>
       <p className='texth2'>
         Summoner Name: {buscarNick} <br />
         Summoner LVL: {playerData.summonerLevel}
@@ -141,9 +169,8 @@ function App () {
             <div className='texth2'>
               Match History!:<br />
               {playerHistory.map((historyData, index) => {
-                // Busca el participante que coincide con nick2
                 const participant = historyData.info.participants.find(participant => participant.riotIdGameName === nick2)
-                // Si existe el participante, comprobamos si ganó o perdió
+
                 const matchResultClass = participant ? (participant.win ? 'win' : 'lose') : 'lose'
 
                 return (
