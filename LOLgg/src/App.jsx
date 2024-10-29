@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css'
-import { Button } from '@mui/material'
+import { Button, TextField, Select, MenuItem } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
-const API_KEY = 'RGAPI-463d62d1-990e-47cb-9429-7e635cb484c7'
+const API_KEY = 'RGAPI-4373516a-1af5-490d-afa7-ecef9aeb5341'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
@@ -104,22 +104,28 @@ function App () {
     <div>
       <AppBar position='static' color='default'>
         <Toolbar>
-          <Box display='flex' alignItems='center' mr={2}>
-            <img
-              src='https://i.imgur.com/TUhrHC3.png'
-              alt='logo'
-              style={{ width: '130px', height: 'auto', borderRadius: '8px' }}
-            />
+          <Box display='flex' justifyContent='space-between' alignItems='center' width='100%'>
+
+            <Box display='flex' alignItems='center' mr={2}>
+              <img
+                src='https://i.imgur.com/TUhrHC3.png'
+                alt='logo'
+                style={{ width: '130px', height: 'auto', borderRadius: '8px' }}
+              />
+            </Box>
+
+            <Box display='flex' justifyContent='center' flex='1'>
+              <img
+                src='https://i.imgur.com/NOEKnDI.png'
+                alt='logo'
+                style={{ width: '180px', height: 'auto', borderRadius: '8px' }}
+              />
+            </Box>
           </Box>
 
           <Box className='texth2' display='flex' justifyContent='flex-end' flexGrow={1}>
-            <Link href='/' color='inherit' underline='none' mx={2}>
-              Inicio
-            </Link>
-            <Link href='/sobre-nosotros' color='inherit' underline='none' mx={2}>
-              Sobre Nosotros
-            </Link>
-            <Link href='/contacto' color='inherit' underline='none' mx={2}>
+
+            <Link href='https://github.com/manudevcba' color='inherit' underline='none' mx={2} target='_blank' rel='noreferrer'>
               Contacto
             </Link>
           </Box>
@@ -127,20 +133,56 @@ function App () {
       </AppBar>
       <br />
       <br />
-      <input type='text' placeholder='ejemplo: marinero#7218' onChange={e => setBuscarNick(e.target.value)} />
-      <select name='' id='' onChange={e => setBuscarServer(e.target.value)}>
-        <option value={servers.brasil}>BR</option>
-        <option value={servers.europan}>EUN</option>
-        <option value={servers.europaw}>EUW</option>
-        <option value={servers.japon}>JP</option>
-        <option value={servers.korea}>KR</option>
-        <option value={servers.lan}>LAN</option>
-        <option value={servers.las}>LAS</option>
-        <option value={servers.na}>NA</option>
-        <option value={servers.oceania}>OC</option>
+      <div className='divBuscador'>
+        <Box
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          gap={2}
+          padding={2}
+          bgcolor='background.paper'
+          borderRadius={2}
+          boxShadow={3}
+          sx={{ width: '50%', margin: 'auto' }} // Asegúrate de que solo ocupe la mitad
+        >
+          <TextField
+            variant='outlined'
+            label='Nick de invocador'
+            placeholder='ejemplo: marinero#7218'
+            onChange={e => setBuscarNick(e.target.value)}
+            size='small'
+            InputLabelProps={{
+              style: { fontWeight: 'bold' } // Establece el estilo en negrita
+            }}
 
-      </select>
-      <Button variant='contained' size='small' onClick={buscarPlayer}>buscar summoner</Button>
+          />
+
+          <Select
+            defaultValue=''
+            onChange={(e) => setBuscarServer(e.target.value)}
+            displayEmpty
+            sx={{ minWidth: 120 }}
+            size='small'
+          >
+            <MenuItem value='' disabled>
+              Selecciona un servidor
+            </MenuItem>
+            <MenuItem value={servers.brasil}>BR</MenuItem>
+            <MenuItem value={servers.europan}>EUN</MenuItem>
+            <MenuItem value={servers.europaw}>EUW</MenuItem>
+            <MenuItem value={servers.japon}>JP</MenuItem>
+            <MenuItem value={servers.korea}>KR</MenuItem>
+            <MenuItem value={servers.lan}>LAN</MenuItem>
+            <MenuItem value={servers.las}>LAS</MenuItem>
+            <MenuItem value={servers.na}>NA</MenuItem>
+            <MenuItem value={servers.oceania}>OC</MenuItem>
+          </Select>
+
+          <Button variant='contained' size='medium' onClick={buscarPlayer}>
+            Buscar Summoner
+          </Button>
+        </Box>
+      </div>
       <p className='texth2'>
         Summoner Name: {buscarNick} <br />
         Summoner LVL: {playerData.summonerLevel}

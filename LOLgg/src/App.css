@@ -27,8 +27,7 @@ body {
 }
 
 .history-container {
-    width: 50%; /* Ocupar la mitad del ancho */
-    position: absolute;
+    width: 50%; /* Ocupar la mitad del ancho */    
     right: 0; /* Posicionarlo a la derecha */
     top: 0;
     padding: 20px;
@@ -39,5 +38,14 @@ body {
     width: 50px;
     height: auto;
 }
-  
+.divBuscador {
+    background-image: url("https://i.imgur.com/1vEVLkl.png");
+    background-size: cover; /* Asegúrate de que la imagen cubra el fondo */
+    background-position: center; /* Centra la imagen */
+    height: 200px; /* Aumenta la altura según sea necesario */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho del contenedor */
+    display: flex; /* Permite el uso de flexbox */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+}
   
