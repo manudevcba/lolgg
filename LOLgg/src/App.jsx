@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './App.css'
-import { Button, TextField, Select, MenuItem } from '@mui/material'
+import { Button, TextField, Select, MenuItem, Typography, Grid, Container } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
-const API_KEY = 'RGAPI-4373516a-1af5-490d-afa7-ecef9aeb5341'
+const API_KEY = 'RGAPI-b819d1ae-0750-47ad-ae3b-27c33a2d0b69'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
@@ -183,66 +183,140 @@ function App () {
           </Button>
         </Box>
       </div>
-      <p className='texth2'>
-        Summoner Name: {buscarNick} <br />
-        Summoner LVL: {playerData.summonerLevel}
-      </p>
+      <Container maxWidth={false} sx={{ maxWidth: 'calc(100% - 500px)', mx: 'auto' }}>
+        <Box
+          sx={{
+            width: '100%',
+            padding: { xs: 2, sm: 3 },
+            border: '1px solid #e0e0e0',
+            borderRadius: '8px',
+            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+            bgcolor: 'background.default',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'space-between',
+            alignItems: { xs: 'center', md: 'flex-start' },
+            gap: { xs: 2, md: 3 },
+            marginBottom: 3,
+            mx: 'auto'
+          }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: 'center', gap: 2, flexShrink: 0 }}>
+            <Box sx={{ textAlign: 'center', position: 'relative' }}>
+              <Box sx={{ position: 'relative', display: 'inline-block' }}>
+                <img
+                  className='icono'
+                  src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`}
+                  alt='Summoner Icon'
+                  style={{ width: 100, height: 100, margin: '4px', borderRadius: '50%', border: '2px solid #f0f0f0' }}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    bottom: '-5px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 28,
+                    height: 28,
+                    bgcolor: 'primary.main',
+                    color: 'background.paper',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '0.9rem',
+                    fontWeight: 'bold',
+                    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.15)'
+                  }}
+                >
+                  {playerData.summonerLevel}
+                </Box>
+              </Box>
+              <Typography variant='h6' className='texth2' sx={{ whiteSpace: 'nowrap', marginTop: 1, fontWeight: 'bold' }}>
+                {buscarNick}
+              </Typography>
+            </Box>
+          </Box>
 
-      <p className='texth2'>
-        {playerRank.length > 0
-          ? (
-            <>
-              <img className='icono' src={`https://ddragon.leagueoflegends.com/cdn/14.19.1/img/profileicon/${playerData.profileIconId}.png`} alt='' />
-              {imagenRank(playerRank[0].tier)}
-              <br /> <br />
+          <Box sx={{ textAlign: 'center', flexGrow: 1, mx: 2 }}>
+            {playerRank.length > 0
+              ? (
+                <>
+                  <Box sx={{ mb: 1 }}>{imagenRank(playerRank[0].tier)}</Box>
+                  <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+                    {playerRank[0].tier} {playerRank[0].rank}
+                  </Typography>
+                  <Typography variant='body1' sx={{ color: 'text.secondary', mt: 1 }}>
+                    {playerRank[0].leaguePoints} LP
+                  </Typography>
+                  <Typography variant='body2' sx={{ color: 'text.secondary', mt: 1 }}>
+                    {playerRank[0].wins}V / {playerRank[0].losses}P - WinRate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}%
+                  </Typography>
+                </>
+                )
+              : (
+                <Typography variant='body1' className='texth2' sx={{ mt: 2 }}>
+                  No hay datos, por favor ingresa tu cuenta! :D
+                </Typography>
+                )}
+          </Box>
 
-              Rank SoloQ: {playerRank[0].tier} {playerRank[0].rank} {playerRank[0].leaguePoints} Lps <br />
-              Wins/Losses: {playerRank[0].wins} / {playerRank[0].losses} winrate: {Math.round((playerRank[0].wins / (playerRank[0].wins + playerRank[0].losses)) * 100)}% <br />
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
+            <img
+              src='https://i.imgur.com/aDsZYO8.png'
+              alt='Imagen de interés'
+              style={{
+                width: '100%',
+                maxWidth: '140px',
+                height: 'auto',
+                objectFit: 'contain',
+                borderRadius: '4px'
+              }}
+            />
+          </Box>
+        </Box>
+      </Container>
 
-            </>
-            )
-          : (
-              'No hay datos, por favor ingresa tu cuenta! :D'
-            )}
-      </p>
       {playerHistory.length
         ? (
-          <div className='history-container'>
-            <div className='texth2'>
-              Match History!:<br />
-              {playerHistory.map((historyData, index) => {
-                const participant = historyData.info.participants.find(participant => participant.riotIdGameName === nick2)
+          <Box sx={{ padding: 3, bgcolor: 'background.paper', borderRadius: '8px', boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', marginBottom: 3 }}>
+            <Typography variant='h5' sx={{ marginBottom: 2 }}>
+              Match History!:
+            </Typography>
+            {playerHistory.map((historyData, index) => {
+              const participant = historyData.info.participants.find(participant => participant.riotIdGameName === nick2)
+              const matchResultClass = participant ? (participant.win ? 'win' : 'lose') : 'lose'
 
-                const matchResultClass = participant ? (participant.win ? 'win' : 'lose') : 'lose'
-
-                return (
-                  <React.Fragment key={index}>
-                    <h3>GAME {index + 1}</h3>
-                    <div className={matchResultClass}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div>
-                          {historyData.info.participants.slice(0, 5).map((data, participantsIndex) => (
-                            <p key={participantsIndex}>
-                              <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} /> {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} /  ({(data.challenges.kda).toFixed(1)})
-                            </p>
-                          ))}
-                        </div>
-                        <div>
-                          {historyData.info.participants.slice(5, 10).map((data, participantsIndex) => (
-                            <p key={participantsIndex + 5}>
-                              <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} /> {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / ({(data.challenges.kda).toFixed(1)})
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </React.Fragment>
-                )
-              })}
-            </div>
-          </div>
+              return (
+                <Box key={index} sx={{ marginBottom: 2 }}>
+                  <Box sx={{ padding: 2, bgcolor: matchResultClass === 'win' ? 'success.main' : 'error.main', borderRadius: '8px', color: 'white' }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        {historyData.info.participants.slice(0, 5).map((data, participantsIndex) => (
+                          <Typography key={participantsIndex} variant='body2' sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
+                            <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} alt={data.championName} style={{ width: 30, height: 30, marginRight: 1 }} />
+                            {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / ({(data.challenges.kda).toFixed(1)})
+                          </Typography>
+                        ))}
+                      </Grid>
+                      <Grid item xs={6}>
+                        {historyData.info.participants.slice(5, 10).map((data, participantsIndex) => (
+                          <Typography key={participantsIndex + 5} variant='body2' sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
+                            <img className='champ-imagen' src={`https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/${data.championName}.png`} alt={data.championName} style={{ width: 30, height: 30, marginRight: 1 }} />
+                            {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / ({(data.challenges.kda).toFixed(1)})
+                          </Typography>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Box>
+              )
+            })}
+          </Box>
           )
-        : <p className='texth2'> No hay datos en el historial</p>}
+        : (
+          <Typography className='texth2'>No hay datos en el historial</Typography>
+          )}
 
     </div>
   )
