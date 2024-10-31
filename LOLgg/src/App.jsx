@@ -8,7 +8,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 
-const API_KEY = 'RGAPI-b819d1ae-0750-47ad-ae3b-27c33a2d0b69'
+const API_KEY = 'RGAPI-c2379c2c-0df2-4aed-9a61-eddeb2e61d43'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')

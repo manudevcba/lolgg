@@ -3,10 +3,11 @@ const cors = require('cors')
 const axios = require('axios')
 
 const app = express()
+const port = process.env.PORT || 4000
 
 app.use(cors())
 
-const API_KEY = 'RGAPI-b819d1ae-0750-47ad-ae3b-27c33a2d0b69'
+const API_KEY = 'RGAPI-c2379c2c-0df2-4aed-9a61-eddeb2e61d43'
 
 app.get('/infoAcc', async (req, res) => {
   const playerReg = req.query.region
@@ -33,6 +34,6 @@ app.get('/infoAcc', async (req, res) => {
   res.json(infoAcc)
 })
 
-app.listen(4000, function () {
+app.listen(port, function () {
   console.log('server started on port 4000')
 })
