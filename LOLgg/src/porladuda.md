@@ -182,10 +182,150 @@ axios.get(`https://${sv}.api.riotgames.com/lol/league/v4/entries/by-summoner/${p
       .then((value) =>
         console.log(value))
 
-const matchDataArray = []
-for (let i = 0; i < playerMatch.length; i++) {
-        const matchData = await axios.get(`https://${reg}.api.riotgames.com/lol/match/v5/matches/by-puuid/${playerMatch[i]}?api_key=${API_KEY}`)
-          .then(response => response.data)
-          .catch(err => err)
-        matchDataArray.push(matchData)
-      }
+
+{playerHistory.length !== 0
+        ? (
+          <div className='texth2'> Hay datos <br />
+            {playerHistory.map((historyData, index) =>
+              <>
+                <h3>GAME {index + 1} </h3>
+                <div>{historyData.info.participants.map((data, participantsIndex) =>
+                  <p> player {participantsIndex + 1}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)}) </p>
+
+                )}
+                </div>
+
+              </>)}
+
+          </div>
+          )
+        : <p className='texth2'> No hay datos</p>}
+    </div>
+
+    {playerHistory.length
+        ? (
+          <div className='texth2'> Hay datos <br />
+            {playerHistory.map((historyData, index) => (
+              <React.Fragment key={index}>
+                <h3>GAME {index + 1}</h3>
+                <div className={historyData.info.participants.some(participant => participant.riotIdGameName === nick2)
+                  ? historyData.info.participants.some(participant => participant.riotIdGameName === nick2 && participant.win)
+                    ? 'win'
+                    : 'lose'
+                  : 'lose'}
+                >
+                  {historyData.info.participants.map((data, participantsIndex) => (
+                    <p key={participantsIndex}>
+                      player {participantsIndex + 1}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)})
+                    </p>
+                  ))}
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          )
+        : <p className='texth2'> No hay datos en el historial</p>}
+
+    {playerHistory.length
+        ? (
+          <div className='texth2'>
+            <br />
+            {playerHistory.map((historyData, index) => (
+              <React.Fragment key={index}>
+                <h3>GAME {index + 1}</h3>
+                <div className={historyData.info.participants.some(participant => participant.riotIdGameName === nick2)
+                  ? historyData.info.participants.some(participant => participant.riotIdGameName === nick2 && participant.win)
+                    ? 'win'
+                    : 'lose'
+                  : 'lose'}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {/* Columna del equipo 1 (jugadores 1-5) */}
+                    <div>
+                      {historyData.info.participants.slice(0, 5).map((data, participantsIndex) => (
+                        <p key={participantsIndex}>
+                          player {participantsIndex + 1}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)})
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Columna del equipo 2 (jugadores 6-10) */}
+                    <div>
+                      {historyData.info.participants.slice(5, 10).map((data, participantsIndex) => (
+                        <p key={participantsIndex + 5}>
+                          player {participantsIndex + 6}: {data.riotIdGameName}, KDA: {data.kills} / {data.deaths} / {data.assists} / {data.championName} ({(data.challenges.kda).toFixed(1)})
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+            ))}
+          </div>
+          )
+        : <p className='texth2'> No hay datos en el historial</p>}
+
+        <img href='https://imgur.com/TUhrHC3' src='https://i.imgur.com/TUhrHC3.png' alt='logo' />
+      <header> </header>
+
+      <br /><br />
+
+      <select name='' id='' onChange={e => setBuscarServer(e.target.value)}>
+        <option value={servers.brasil}>BR</option>
+        <option value={servers.europan}>EUN</option>
+        <option value={servers.europaw}>EUW</option>
+        <option value={servers.japon}>JP</option>
+        <option value={servers.korea}>KR</option>
+        <option value={servers.lan}>LAN</option>
+        <option value={servers.las}>LAS</option>
+        <option value={servers.na}>NA</option>
+        <option value={servers.oceania}>OC</option>
+
+      </select>
+
+<Box>
+
+        <Box
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          gap={2}
+          padding={2}
+          bgcolor='background.paper'
+          borderRadius={2}
+          boxShadow={3}
+        >
+          <TextField
+            variant='outlined'
+            label='Nick de invocador'
+            placeholder='ejemplo: marinero#7218'
+            onChange={e => setBuscarNick(e.target.value)}
+            size='small'
+          />
+
+          <Select
+            defaultValue='' // Valor predeterminado
+            onChange={(e) => setBuscarServer(e.target.value)}
+            displayEmpty
+            sx={{ minWidth: 120 }}
+            size='small'
+          >
+            <MenuItem value='' disabled>
+              Selecciona un servidor
+            </MenuItem>
+            <MenuItem value={servers.brasil}>BR</MenuItem>
+            <MenuItem value={servers.europan}>EUN</MenuItem>
+            <MenuItem value={servers.europaw}>EUW</MenuItem>
+            <MenuItem value={servers.japon}>JP</MenuItem>
+            <MenuItem value={servers.korea}>KR</MenuItem>
+            <MenuItem value={servers.lan}>LAN</MenuItem>
+            <MenuItem value={servers.las}>LAS</MenuItem>
+            <MenuItem value={servers.na}>NA</MenuItem>
+            <MenuItem value={servers.oceania}>OC</MenuItem>
+          </Select>
+
+          <Button variant='contained' size='medium' onClick={buscarPlayer}>
+            Buscar Summoner
+          </Button>
+        </Box>
+      </Box>

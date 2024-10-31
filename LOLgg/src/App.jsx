@@ -30,8 +30,6 @@ function App () {
     oceania: 'oc1+sea'
   }
 
-  // "https://ddragon.leagueoflegends.com/cdn/14.21.1/img/champion/" iconos campeones xd
-
   const nickytag2 = buscarNick.split('#')
   const nick2 = nickytag2[0]
 
@@ -143,7 +141,7 @@ function App () {
           bgcolor='background.paper'
           borderRadius={2}
           boxShadow={3}
-          sx={{ width: '50%', margin: 'auto' }} // Asegúrate de que solo ocupe la mitad
+          sx={{ width: '50%', margin: 'auto' }}
         >
           <TextField
             variant='outlined'
@@ -152,7 +150,7 @@ function App () {
             onChange={e => setBuscarNick(e.target.value)}
             size='small'
             InputLabelProps={{
-              style: { fontWeight: 'bold' } // Establece el estilo en negrita
+              style: { fontWeight: 'bold' }
             }}
 
           />
@@ -183,7 +181,7 @@ function App () {
           </Button>
         </Box>
       </div>
-      <Container maxWidth={false} sx={{ maxWidth: 'calc(100% - 500px)', mx: 'auto' }}>
+      <Container maxWidth={false} sx={{ maxWidth: 'calc(100% - 800px)', mx: 'auto' }}>
         <Box
           sx={{
             width: '100%',
@@ -198,7 +196,9 @@ function App () {
             alignItems: { xs: 'center', md: 'flex-start' },
             gap: { xs: 2, md: 3 },
             marginBottom: 3,
-            mx: 'auto'
+            mx: 'auto',
+            top: '10px',
+            position: 'relative'
           }}
         >
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, alignItems: 'center', gap: 2, flexShrink: 0 }}>
