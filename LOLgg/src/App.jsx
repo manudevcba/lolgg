@@ -41,7 +41,7 @@ function App () {
       const sv = regsv[0]
       const reg = regsv[1]
 
-      const responsePlayer = await axios.get('http://localhost:4000/infoAcc', {
+      const responsePlayer = await axios.get('/api/infoAcc', {
         params: { nick, tag, server: sv, region: reg }
       })
       const playerDataTemp = responsePlayer.data
