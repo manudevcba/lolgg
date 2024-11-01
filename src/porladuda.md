@@ -328,4 +328,4 @@ axios.get(`https://${sv}.api.riotgames.com/lol/league/v4/entries/by-summoner/${p
             Buscar Summoner
           </Button>
         </Box>
-      </Box>
+      </Box> god
