@@ -4,7 +4,7 @@ const axios = require('axios')
 
 const app = express()
 
-const API_KEY = 'RGAPI-8d35515e-6836-46a1-9896-04232fecdb48'
+const API_KEY = 'RGAPI-eb46a712-609f-410b-bb99-97107e1ac559'
 
 app.get('/api/infoAcc', async (req, res) => {
   const playerReg = req.query.region
