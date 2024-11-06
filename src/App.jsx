@@ -4,9 +4,10 @@ import './App.css'
 import { Button, TextField, Select, MenuItem, Typography, Grid, Container } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-
 import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
+import Footer from './components/Footer'
+import './index.css'
 
 const API_KEY = 'RGAPI-eb46a712-609f-410b-bb99-97107e1ac559'
 
@@ -317,7 +318,7 @@ function App () {
         : (
           <Typography className='texth2'>No hay datos en el historial</Typography>
           )}
-
+      <Footer />
     </div>
   )
 }
