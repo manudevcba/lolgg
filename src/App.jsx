@@ -75,25 +75,25 @@ function App () {
 
   function imagenRank (rank) {
     if (rank === 'DIAMOND') {
-      return <a href='https://imgur.com/5NfRZ8i'><img className='rank-imagen' src='https://i.imgur.com/5NfRZ8i.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/5NfRZ8i'><img className='rank-imagen' src='https://i.imgur.com/5NfRZ8i.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'IRON') {
-      return <a href='https://imgur.com/TUDQs3o'><img className='rank-imagen' src='https://i.imgur.com/TUDQs3o.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/TUDQs3o'><img className='rank-imagen' src='https://i.imgur.com/TUDQs3o.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'BRONZE') {
-      return <a href='https://imgur.com/gRYyXkx'><img className='rank-imagen' src='https://i.imgur.com/gRYyXkx.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/gRYyXkx'><img className='rank-imagen' src='https://i.imgur.com/gRYyXkx.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'SILVER') {
-      return <a href='https://imgur.com/UEOK81G'><img className='rank-imagen' src='https://i.imgur.com/UEOK81G.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/UEOK81G'><img className='rank-imagen' src='https://i.imgur.com/UEOK81G.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'GOLD') {
-      return <a href='https://imgur.com/vrTdXze'><img className='rank-imagen' src='https://i.imgur.com/vrTdXze.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/vrTdXze'><img className='rank-imagen' src='https://i.imgur.com/vrTdXze.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'PLATINUM') {
-      return <a href='https://imgur.com/pvsqRfl'><img className='rank-imagen' src='https://i.imgur.com/pvsqRfl.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/pvsqRfl'><img className='rank-imagen' src='https://i.imgur.com/pvsqRfl.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'EMERALD') {
-      return <a href='https://imgur.com/ZK1LeZQ'><img className='rank-imagen' src='https://i.imgur.com/ZK1LeZQ.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/ZK1LeZQ'><img className='rank-imagen' src='https://i.imgur.com/ZK1LeZQ.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'MASTER') {
-      return <a href='https://imgur.com/m55levP'><img className='rank-imagen' src='https://i.imgur.com/m55levP.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/m55levP'><img className='rank-imagen' src='https://i.imgur.com/m55levP.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'GRANDMASTER') {
-      return <a href='https://imgur.com/AObqDXT'><img className='rank-imagen' src='https://i.imgur.com/AObqDXT.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/AObqDXT'><img className='rank-imagen' src='https://i.imgur.com/AObqDXT.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else if (rank === 'CHALLENGER') {
-      return <a href='https://imgur.com/N07nf04'><img className='rank-imagen' src='https://i.imgur.com/N07nf04.png' title='source: imgur.com' /></a>
+      return <a href='https://imgur.com/N07nf04'><img className='rank-imagen' src='https://i.imgur.com/N07nf04.png' title='source: imgur.com' style={{ display: 'block', margin: '0 auto' }} /></a>
     } else {
       return <a href=''>UNRANKED O ERROR ! :D</a>
     }
@@ -243,7 +243,7 @@ function App () {
             {playerRank.length > 0
               ? (
                 <>
-                  <Box sx={{ mb: 1 }}>{imagenRank(playerRank[0].tier)}</Box>
+                  <Box sx={{ mb: 1, display: 'flex', justifyContent: 'center' }}>{imagenRank(playerRank[0].tier)}</Box>
                   <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                     {playerRank[0].tier} {playerRank[0].rank}
                   </Typography>
