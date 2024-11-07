@@ -9,7 +9,7 @@ import Link from '@mui/material/Link'
 import Footer from './components/Footer'
 import './index.css'
 
-const API_KEY = 'RGAPI-eb46a712-609f-410b-bb99-97107e1ac559'
+const API_KEY = 'RGAPI-bc5d7911-763b-4e86-829c-c26017b37f21'
 
 function App () {
   const [buscarNick, setBuscarNick] = useState('')
