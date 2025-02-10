@@ -147,7 +147,7 @@ function App () {
           <TextField
             variant='outlined'
             label='Nick de invocador'
-            placeholder='ejemplo: the promise#LIDER'
+            placeholder='ejemplo:Stand#LAS'
             onChange={e => setBuscarNick(e.target.value)}
             size='small'
             InputLabelProps={{
